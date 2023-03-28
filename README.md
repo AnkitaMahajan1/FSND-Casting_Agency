@@ -37,14 +37,6 @@ To run the server, execute:
 
 flask run
 
-Project deployed at
-
---url
-To test live APIs the only way right now to do this is curl requests. Add Auth token headers from logins below to test.
-OATH login url. There are three logins, JWTs for these appear in the url after successfull login. Those tokens are needed to test the different APIs.
-
-https://dev-8w8jzycn5qmrkfp0.us.auth0.com/authorize?audience=capstone&response_type=token&client_id=PBtNJiAXuBp5pW7sPAIVTTIBwiGNq7QE&redirect_uri=https://127.0.0.1:5000/actors
-
 casting Assistant token 
 
 eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ilg1eGtTYnNqSkJxVnZkd3ZwSHU1MSJ9.eyJpc3MiOiJodHRwczovL2Rldi04dzhqenljbjVxbXJrZnAwLnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw2NDA0NjQ4ZWYzNGQyYzJhMmM2NzdlMDMiLCJhdWQiOiJjYXBzdG9uZSIsImlhdCI6MTY3OTkyODg2NCwiZXhwIjoxNjc5OTM2MDY0LCJhenAiOiJQQnROSmlBWHVCcDVwVzdzUEFJVlRUSUJ3aUdOcTdRRSIsInNjb3BlIjoiIiwicGVybWlzc2lvbnMiOlsiZ2V0OmFjdG9ycyIsImdldDptb3ZpZXMiXX0.C017jABMYXX1pZr7SNcI_o1umh6sPMaFPlI320szNP-132He_eU9Mzy82Yg6qjwHLgUAgpv1tCGq563zwaFpMeZ4T00RaxvrQWKtfKyZ8txdUpnmYCOMBIju6MsSFEeC-ziVB_s-NC50oOwc8kgtOscthprz4IE9yE72T5JmxwreJj5St09NRaMwU9K2h41Jw3a1BUEwUFyPzvB_t__UyXYxAX-_SoM-f7AYTHX_tsZIpkiVybd5f4W6S2uEPKxadW2SeTMnoP2WFhz5JhA3K2SMlcmn7z8Sc2d19N9f5lFLiQMYM1aHkRIt70hCgF48n4z5ctpOp_dYmi2j6nxZ9g
