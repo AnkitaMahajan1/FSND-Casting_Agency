@@ -1,0 +1,8 @@
+<form method="POST" action="/actors/{{actor.id}}/edit">
+    <input type="hidden" name="_method" value="PUT">
+    <input  name="id" value="{{ actor.id }}">
+    <input type="text" name="name" value="{{ actor.name }}">
+    <input type="text" name="age" value="{{ actor.age }}">
+    <input type="text" name="gender" value="{{ actor.gender }}">
+    <button type="submit">Update</button>
+  </form>

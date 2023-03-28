@@ -1,0 +1,14 @@
+
+  <h1>Actors</h1>
+
+  <table>
+    <tbody>
+      {% for actor in actors %}
+        <tr>
+          <td>Name: {{ actor.name }}</td>
+          <td>Age: {{ actor.age }}</td>
+          <td>Gender: {{ actor.gender }}</td>
+        </tr>
+    </tbody>
+      {% endfor %}
+    
