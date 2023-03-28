@@ -11,21 +11,21 @@ from auth import AuthError, requires_auth
 
 def create_app(test_config=None):
   # create and configure the app
-  app = Flask(__name__)
-  setup_db(app)
-  moment = Moment(app)
-  CORS(app)
+  application = Flask(__name__)
+  setup_db(application)
+  moment = Moment(application)
+  CORS(application)
   #----------------------------------------------------------------------------#
 # Controllers.
 #----------------------------------------------------------------------------#
-  @app.after_request
+  @application.after_request
   def after_request(response):
     response.headers.add('Access-Control-Allow-Headers',
                               'Content-Type, Authorization')
     response.headers.add('Access-Control-Allow-Methods',
                               'GET, POST, PATCH, DELETE, OPTIONS')
     return response
-  @app.route('/')
+  @application.route('/')
   # @requires_auth('get:actors')
   def index():
     return render_template('pages/index.html')
@@ -33,7 +33,7 @@ def create_app(test_config=None):
   #  Actors
   #  ----------------------------------------------------------------
     
-  @app.route('/actors')
+  @application.route('/actors')
   @requires_auth('get:actors')
   def get_actors(payload):
     try:
@@ -45,7 +45,7 @@ def create_app(test_config=None):
       abort(500)
 
   # Create a new actor
-  @app.route('/actors', methods=['POST'])
+  @application.route('/actors', methods=['POST'])
   @requires_auth('post:actors')
   def create_actor(payload):
     try:
@@ -61,7 +61,7 @@ def create_app(test_config=None):
       abort(400)
 
   # Update an existing actor
-  @app.route('/actors/<int:id>', methods=['PATCH'])
+  @application.route('/actors/<int:id>', methods=['PATCH'])
   @requires_auth("edit:actor")
   def update_actor(payload, id):
     try:
@@ -79,7 +79,7 @@ def create_app(test_config=None):
             abort(404)
 
   # Delete an actor
-  @app.route('/actors/<int:id>', methods=['DELETE'])
+  @application.route('/actors/<int:id>', methods=['DELETE'])
   @requires_auth("delete:actor")
   def delete_actor(payload, id):
     try:
@@ -95,7 +95,7 @@ def create_app(test_config=None):
 
   # Get a list of all movies
 
-  @app.route('/movies')
+  @application.route('/movies')
   @requires_auth('get:movies')
   def get_movies(payload):
     all_movies = Movie.query.all()
@@ -105,7 +105,7 @@ def create_app(test_config=None):
     return jsonify({'success': True, 'movies': movie_list})
 
   # Create a new movie
-  @app.route('/movies', methods=['POST'])
+  @application.route('/movies', methods=['POST'])
   @requires_auth('post:movies')
   def create_movie(payload):
     data = request.get_json()
@@ -119,7 +119,7 @@ def create_app(test_config=None):
     return jsonify({'success': True, 'movie': {'title': movie.title, 'release_date': movie.release_date}})
 
   # Update an existing movie
-  @app.route('/movies/<int:id>', methods=['PATCH'])
+  @application.route('/movies/<int:id>', methods=['PATCH'])
   @requires_auth('edit:movie')
   def update_movie(payload, id):
     data = request.get_json()
@@ -134,7 +134,7 @@ def create_app(test_config=None):
     return jsonify({'success': True, 'movie': {'title': movie.title, 'release_date': movie.release_date}})
 
   # Delete a movie
-  @app.route('/movies/<int:id>', methods=['DELETE'])
+  @application.route('/movies/<int:id>', methods=['DELETE'])
   @requires_auth('delete:movie')
   def delete_movie(payload, id):
     movie = Movie.query.get(id)
@@ -145,29 +145,29 @@ def create_app(test_config=None):
     return jsonify({'success': True})
 
   # Error handling
-  @app.errorhandler(400)
+  @application.errorhandler(400)
   def bad_request(error):
     return jsonify({'success': False, 'error': 400, 'message': 'Bad request'}), 400
 
-  @app.errorhandler(404)
+  @application.errorhandler(404)
   def not_found(error):
     return jsonify({'success': False, 'error': 404, 'message': 'Resource not found'}), 404
 
-  @app.errorhandler(422)
+  @application.errorhandler(422)
   def unprocessable_entity(error):
     return jsonify({'success': False, 'error': 422, 'message': 'Unprocessable entity'}), 422
 
 
-  @app.errorhandler(500)
+  @application.errorhandler(500)
   def internal_server_error(error):
     return jsonify({'success': False, 'error': 500, 'message': 'Internal Server Error'}), 500
 
 
 
-  return app
+  return application
 
-app = create_app()
-migrate = Migrate(app= app, db= db)
+application = create_app()
+migrate = Migrate(app= application, db= db)
 
 
 
